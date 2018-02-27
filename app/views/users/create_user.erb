@@ -1,9 +1,8 @@
 <h2>Users</h2>
 
-<% unless locals.empty? %>
-  <%= message %>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
 <% end %>
-
 
 <h3>Sign Up here if you're a first time user</h3>
 <form action="/signup" method="POST">

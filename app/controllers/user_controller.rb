@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !logged_in?
+      flash[:message] = "Please sign-up before you sign in."
       erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
     else
       redirect to '/tweets'
@@ -18,8 +19,8 @@ class UsersController < ApplicationController
     # raise params.inspect
     # params = {"username"=>"Nancy", "email"=>"nancy@yahoo.com", "password"=>"asdf"}
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      "Sorry, can you go back and fill out all three fields: Name, email, and password?"
-      # redirect to '/signup'
+      flash[:message] = "Please provide a username, email, & password."
+      erb :'users/create_user'
     elsif logged_in?
       redirect to '/tweets'
     elsif
